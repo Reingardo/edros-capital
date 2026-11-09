@@ -43,9 +43,9 @@ export default function Home() {
     <>
       <header className="topbar">
         <div className="shell navigation">
-          <a className="wordmark" href="#inicio" aria-label="EdRos Capital, inicio">
+          <a className="wordmark" href="#inicio" aria-label="ROTE Capital, inicio">
             <span className="logomark" aria-hidden="true">↗</span>
-            <span>EdRos<span className="wordmark-light">Capital</span></span>
+            <span>ROTE<span className="wordmark-light">CAPITAL</span></span>
           </a>
           <nav aria-label="Navegación principal">
             <a href="#servicios">Servicios</a><a href="#enfoque">Enfoque</a><a href="#sobre-mi">Sobre mí</a>
@@ -72,7 +72,7 @@ export default function Home() {
             <svg className="trace" viewBox="0 0 440 170" preserveAspectRatio="none" aria-hidden="true">
               <path d="M0 149 L35 137 L63 148 L96 111 L130 121 L168 88 L202 99 L244 62 L278 74 L312 45 L343 57 L390 19 L440 0" />
             </svg>
-            <span className="visual-index">EDROS CAPITAL / 01</span>
+            <span className="visual-index">ROTE CAPITAL / 01</span>
             <div className="profile-label"><span className="profile-symbol" aria-hidden="true">↗</span><div><strong>Edgar Rosales</strong><small>Inversor · Mentor de trading</small></div></div>
           </div>
         </section>
@@ -112,7 +112,7 @@ export default function Home() {
             <h2>Soy Edgar Rosales.</h2>
             <p className="bio-lead">Invierto en tecnología e innovación y llevo más de una década en los mercados financieros.</p>
             <p>Mi trayectoria incluye inversiones tempranas en NVIDIA, Palantir, AMD, Google y Tesla. Cuento con un MBA en Administración y Finanzas por Tecmilenio, obtenido en 2018, y experiencia operando futuros, opciones y criptomonedas.</p>
-            <p>Fundé EdRos Capital para compartir cómo evalúo negocios, leo el mercado y gestiono el riesgo. En la mentoría trabajamos estas habilidades a partir de tus objetivos.</p>
+            <p>Fundé ROTE Capital para compartir cómo evalúo negocios, leo el mercado y gestiono el riesgo. En la mentoría trabajamos estas habilidades a partir de tus objetivos.</p>
             <ul className="tags" aria-label="Áreas de experiencia"><li>Tecnología</li><li>Futuros</li><li>Opciones</li><li>Criptomonedas</li></ul>
           </div>
         </section>
@@ -128,7 +128,7 @@ export default function Home() {
           <form className="booking-form" action={`https://formsubmit.co/${email}`} method="post">
             <h3>Solicita tu cita</h3>
             <p>Completa tus datos para coordinar la conversación.</p>
-            <input type="hidden" name="_subject" value="EdRos Capital — Nueva solicitud de cita" />
+            <input type="hidden" name="_subject" value="ROTE Capital — Nueva solicitud de cita" />
             <input type="hidden" name="_template" value="table" />
             <input type="hidden" name="_next" value="https://rote-capital-mentoria.edgar-pro91.chatgpt.site/gracias.html" />
             <input hidden type="text" name="_honey" tabIndex={-1} autoComplete="off" />
@@ -153,8 +153,8 @@ export default function Home() {
         </section>
       </main>
 
-      <footer className="footer"><div className="shell"><a href="#inicio" className="wordmark"><span className="logomark" aria-hidden="true">↗</span><span>EdRos<span className="wordmark-light">Capital</span></span></a><div><button className="text-button" type="button" onClick={() => privacy.current?.showModal()}>Privacidad</button><a href={instagram} target="_blank" rel="noreferrer">Instagram ↗</a></div></div></footer>
-      <dialog ref={privacy} aria-labelledby="privacy-title"><form method="dialog"><button className="close" aria-label="Cerrar aviso de privacidad">×</button></form><h2 id="privacy-title">Tu privacidad</h2><p>Edgar Rosales, de EdRos Capital, usará tus datos para responder y coordinar tu cita. FormSubmit procesa el formulario y lo envía a {email}.</p><p>Evita incluir credenciales o datos financieros sensibles. Puedes solicitar acceso, corrección o eliminación de tus datos escribiendo a ese correo.</p></dialog>
+      <footer className="footer"><div className="shell"><a href="#inicio" className="wordmark"><span className="logomark" aria-hidden="true">↗</span><span>ROTE<span className="wordmark-light">CAPITAL</span></span></a><div><button className="text-button" type="button" onClick={() => privacy.current?.showModal()}>Privacidad</button><a href={instagram} target="_blank" rel="noreferrer">Instagram ↗</a></div></div></footer>
+      <dialog ref={privacy} aria-labelledby="privacy-title"><form method="dialog"><button className="close" aria-label="Cerrar aviso de privacidad">×</button></form><h2 id="privacy-title">Tu privacidad</h2><p>Edgar Rosales, de ROTE Capital, usará tus datos para responder y coordinar tu cita. FormSubmit procesa el formulario y lo envía a {email}.</p><p>Evita incluir credenciales o datos financieros sensibles. Puedes solicitar acceso, corrección o eliminación de tus datos escribiendo a ese correo.</p></dialog>
     </>
   );
 }
