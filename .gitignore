@@ -10,7 +10,7 @@
 !/.yarn/versions/
 
 # Generated builds and framework state
-/dist/
+# dist contains the authored static site and is versioned.
 /.next/
 /.vinext/
 /out/
