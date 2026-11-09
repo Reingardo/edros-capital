@@ -1,106 +1,160 @@
-const sidebarWidths = [74, 58, 82, 66, 71, 54];
-const articleWidths = [100, 97, 94, 98, 86];
+"use client";
+
+import Image from "next/image";
+import { useRef, useState } from "react";
+
+const services = [
+  {
+    name: "Mentoría de trading",
+    tag: "01 / TRADING",
+    icon: "⌁",
+    description: "Desarrolla un proceso de operación que puedas preparar, ejecutar y revisar con disciplina.",
+    topics: ["Lectura y estructura del mercado", "Futuros, opciones y criptomonedas", "Gestión del riesgo y revisión de operaciones"],
+  },
+  {
+    name: "Análisis de inversiones",
+    tag: "02 / INVERSIÓN",
+    icon: "◎",
+    description: "Aprende a evaluar empresas y construir una tesis antes de decidir dónde invertir.",
+    topics: ["Tecnología e innovación", "Análisis de negocios y tesis de inversión", "Escenarios, riesgos y horizonte de inversión"],
+  },
+];
+
+const process = [
+  ["Define una hipótesis", "Identifica qué está pasando, qué esperas que cambie y qué evidencia respaldaría tu lectura."],
+  ["Delimita el riesgo", "Antes de tomar una decisión, considera los escenarios posibles y qué invalidaría tu hipótesis."],
+  ["Revisa tus decisiones", "Documenta lo que observaste y lo que hiciste para identificar qué puedes ajustar en tu proceso."],
+];
+
+const questions = [
+  ["¿Necesito experiencia previa?", "Puedes solicitar una conversación tanto si estás empezando como si ya operas o inviertes. En el primer contacto revisaremos tus objetivos."],
+  ["¿Cómo se agenda una cita?", "Envía tu disponibilidad y zona horaria. Te contactaré por correo para acordar la fecha y los detalles."],
+  ["¿Qué incluye y cuánto cuesta?", "El alcance, la frecuencia y los honorarios se acuerdan según tus objetivos y el tipo de acompañamiento que buscas."],
+];
+
+const email = "edgar.pro91@icloud.com";
+const instagram = "https://www.instagram.com/edroscapital/";
 
 export default function Home() {
+  const [interest, setInterest] = useState("");
+  const privacy = useRef<HTMLDialogElement>(null);
+
   return (
-    <main className="fixed inset-0 overflow-hidden bg-[#fbfaf8] text-zinc-900">
-      <header
-        aria-hidden="true"
-        className="grid h-[76px] grid-cols-[1fr_auto_1fr] items-center border-b border-stone-200 bg-white/95 px-6 sm:px-14"
-      >
-        <div className="flex items-center gap-3">
-          <span className="h-9 w-9 rounded-full bg-stone-100" />
-          <span className="h-3.5 w-28 rounded-full bg-stone-100" />
-        </div>
-        <span className="hidden h-9 w-[min(30vw,420px)] rounded-xl bg-stone-100 sm:block" />
-        <div className="flex items-center justify-end gap-3">
-          <span className="hidden h-9 w-9 rounded-full bg-stone-100 sm:block" />
-          <span className="h-9 w-24 rounded-xl bg-stone-100" />
+    <>
+      <header className="topbar">
+        <div className="shell navigation">
+          <a className="wordmark" href="#inicio" aria-label="ROTE Capital, inicio">
+            <span className="logomark" aria-hidden="true">↗</span>
+            <span>ROTE<span className="wordmark-light">CAPITAL</span></span>
+          </a>
+          <nav aria-label="Navegación principal">
+            <a href="#servicios">Servicios</a><a href="#enfoque">Enfoque</a><a href="#sobre-mi">Sobre mí</a>
+          </nav>
+          <a className="button button-small" href="#agenda">Solicitar cita <span aria-hidden="true">↗</span></a>
         </div>
       </header>
 
-      <div
-        aria-hidden="true"
-        className="grid h-[calc(100%-76px)] grid-cols-[180px_minmax(0,1fr)_260px] gap-10 px-6 pb-24 pt-10 opacity-55 max-lg:grid-cols-[150px_minmax(0,1fr)] max-sm:grid-cols-1 sm:px-14"
-      >
-        <aside className="hidden border-r border-stone-200 pr-7 sm:block">
-          <div className="mb-6 h-2.5 w-16 rounded-full bg-stone-200" />
-          <div className="space-y-4">
-            {sidebarWidths.map((width) => (
-              <div key={width} className="flex items-center gap-3">
-                <span className="h-4 w-4 rounded bg-stone-200" />
-                <span
-                  className="h-2.5 rounded-full bg-stone-200"
-                  style={{ width: `${width}%` }}
-                />
-              </div>
-            ))}
-          </div>
-          <div className="mb-6 mt-9 h-2.5 w-24 rounded-full bg-stone-200" />
-          <div className="space-y-4">
-            {sidebarWidths.slice(0, 3).map((width) => (
-              <span
-                key={width}
-                className="block h-2.5 rounded-full bg-stone-200"
-                style={{ width: `${width}%` }}
-              />
-            ))}
-          </div>
-        </aside>
-
-        <article className="mx-auto flex w-full max-w-3xl flex-col gap-6">
-          <div className="space-y-3">
-            <div className="h-2.5 w-28 rounded-full bg-stone-200" />
-            <div className="h-7 w-4/5 rounded-lg bg-stone-200" />
-            <div className="h-7 w-3/5 rounded-lg bg-stone-200" />
-          </div>
-          <div className="min-h-[240px] flex-1 rounded-2xl bg-stone-200" />
-          <div className="flex items-center gap-3">
-            <span className="h-9 w-9 rounded-full bg-stone-200" />
-            <span className="h-2.5 w-28 rounded-full bg-stone-200" />
-          </div>
-          <div className="space-y-2">
-            {articleWidths.map((width) => (
-              <span
-                key={width}
-                className="block h-2.5 rounded-full bg-stone-200"
-                style={{ width: `${width}%` }}
-              />
-            ))}
-          </div>
-        </article>
-
-        <aside className="space-y-5 max-lg:hidden">
-          {[0, 1].map((card) => (
-            <div
-              key={card}
-              className="space-y-4 rounded-2xl border border-stone-200 bg-white/70 p-6"
-            >
-              <span className="block h-10 w-10 rounded-full bg-stone-200" />
-              <span className="block h-3 w-3/5 rounded-full bg-stone-200" />
-              <span className="block h-2.5 w-full rounded-full bg-stone-200" />
-              <span className="block h-2.5 w-4/5 rounded-full bg-stone-200" />
-              <span className="block h-8 w-24 rounded-lg bg-stone-200" />
+      <main id="inicio" className="shell">
+        <section className="hero">
+          <div className="hero-copy">
+            <p className="eyebrow"><span className="status-dot" /> MENTORÍA INDIVIDUAL</p>
+            <h1>Lee el mercado.<br /><em>Decide con criterio.</em></h1>
+            <p className="hero-description">Mentoría en trading y análisis de inversiones con Edgar Rosales. Desarrolla un método para evaluar oportunidades, definir riesgos y revisar tus decisiones.</p>
+            <div className="actions">
+              <a className="button" href="#agenda">Solicitar una cita <span aria-hidden="true">↗</span></a>
+              <a className="button button-outline" href="#servicios">Explorar servicios <span aria-hidden="true">↓</span></a>
             </div>
-          ))}
-        </aside>
-      </div>
+          </div>
 
-      <output
-        aria-live="polite"
-        aria-atomic="true"
-        className="absolute left-1/2 top-[clamp(96px,13vh,122px)] w-[min(620px,calc(100%-40px))] -translate-x-1/2 rounded-[18px] border border-stone-200 bg-white/95 px-5 py-5 shadow-[0_18px_50px_rgb(24_24_27/9%)] backdrop-blur-sm"
-      >
-        <p className="mb-1 text-[11px] font-semibold uppercase tracking-[0.09em] text-stone-500">
-          Building your site
-        </p>
-        <h1 className="text-xl font-semibold tracking-tight">
-          Your site is taking shape
-        </h1>
-        <p className="mt-1 text-sm text-stone-500">
-          Your first version will appear here automatically when it’s ready.
-        </p>
-      </output>
-    </main>
+          <div className="hero-visual">
+            <div className="hero-grid" aria-hidden="true" />
+            <Image src="/assets/edgar.png" alt="Edgar Rosales, mentor de trading y analista de inversiones" fill preload sizes="(max-width: 800px) 100vw, 45vw" />
+            <svg className="trace" viewBox="0 0 440 170" preserveAspectRatio="none" aria-hidden="true">
+              <path d="M0 149 L35 137 L63 148 L96 111 L130 121 L168 88 L202 99 L244 62 L278 74 L312 45 L343 57 L390 19 L440 0" />
+            </svg>
+            <span className="visual-index">ROTE CAPITAL / 01</span>
+            <div className="profile-label"><span className="profile-symbol" aria-hidden="true">↗</span><div><strong>Edgar Rosales</strong><small>Inversor · Mentor de trading</small></div></div>
+          </div>
+        </section>
+
+        <section className="stats" aria-label="Trayectoria">
+          <div><strong>10+</strong><span>Años en mercados<br />financieros</span></div>
+          <div><strong>MBA</strong><span>Administración y Finanzas<br />Tecmilenio · 2018</span></div>
+          <div><strong>1:1</strong><span>Mentoría según<br />tus objetivos</span></div>
+        </section>
+
+        <section className="section" id="servicios">
+          <div className="section-head"><div><p className="eyebrow">01 / SERVICIOS</p><h2>¿Qué quieres trabajar?</h2></div><p>Elige el acompañamiento que mejor encaje con tu experiencia y tus objetivos.</p></div>
+          <div className="service-grid">
+            {services.map(service => (
+              <article className="service-card" key={service.name}>
+                <div className="card-top"><span className="service-icon" aria-hidden="true">{service.icon}</span><span className="eyebrow">{service.tag}</span></div>
+                <h3>{service.name}</h3>
+                <p>{service.description}</p>
+                <ul>{service.topics.map(topic => <li key={topic}>{topic}</li>)}</ul>
+                <a href="#agenda" onClick={() => setInterest(service.name)}>Solicitar cita para {service.name.toLowerCase()} <span aria-hidden="true">↗</span></a>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="section" id="enfoque">
+          <div className="section-head"><div><p className="eyebrow">02 / ENFOQUE</p><h2>Cómo trabajaremos</h2></div><p>Un proceso para evaluar una idea, dimensionar el riesgo y aprender de cada decisión.</p></div>
+          <ol className="steps">
+            {process.map(([title, description], index) => <li key={title}><span className="eyebrow">PASO 0{index + 1}</span><h3>{title}</h3><p>{description}</p></li>)}
+          </ol>
+        </section>
+
+        <section className="section about" id="sobre-mi">
+          <div className="about-photo"><Image src="/assets/biografia.jpeg" alt="Retrato de Edgar Rosales" fill sizes="(max-width: 800px) 100vw, 36vw" /></div>
+          <div className="about-copy">
+            <p className="eyebrow">03 / TU MENTOR</p>
+            <h2>Soy Edgar Rosales.</h2>
+            <p className="bio-lead">Invierto en tecnología e innovación y llevo más de una década en los mercados financieros.</p>
+            <p>Mi trayectoria incluye inversiones tempranas en NVIDIA, Palantir, AMD, Google y Tesla. Cuento con un MBA en Administración y Finanzas por Tecmilenio, obtenido en 2018, y experiencia operando futuros, opciones y criptomonedas.</p>
+            <p>Fundé ROTE Capital para compartir cómo evalúo negocios, leo el mercado y gestiono el riesgo. En la mentoría trabajamos estas habilidades a partir de tus objetivos.</p>
+            <ul className="tags" aria-label="Áreas de experiencia"><li>Tecnología</li><li>Futuros</li><li>Opciones</li><li>Criptomonedas</li></ul>
+          </div>
+        </section>
+
+        <section className="section booking" id="agenda">
+          <div className="booking-copy">
+            <p className="eyebrow">04 / PRIMER CONTACTO</p>
+            <h2>Hablemos de<br />tus objetivos.</h2>
+            <p>Cuéntame qué te gustaría trabajar y cuándo tienes disponibilidad. Te contactaré por correo para acordar una fecha.</p>
+            <div className="contact"><a href={`mailto:${email}`}>{email} <span aria-hidden="true">↗</span></a><a href={instagram} target="_blank" rel="noreferrer">Instagram · @edroscapital <span aria-hidden="true">↗</span></a></div>
+          </div>
+
+          <form className="booking-form" action={`https://formsubmit.co/${email}`} method="post">
+            <h3>Solicita tu cita</h3>
+            <p>Completa tus datos para coordinar la conversación.</p>
+            <input type="hidden" name="_subject" value="ROTE Capital — Nueva solicitud de cita" />
+            <input type="hidden" name="_template" value="table" />
+            <input type="hidden" name="_next" value="https://rote-capital-mentoria.edgar-pro91.chatgpt.site/gracias.html" />
+            <input hidden type="text" name="_honey" tabIndex={-1} autoComplete="off" />
+            <div className="form-row">
+              <label>Nombre completo<input name="nombre" autoComplete="name" placeholder="Tu nombre" maxLength={120} required /></label>
+              <label>Correo electrónico<input type="email" name="email" autoComplete="email" placeholder="tu@correo.com" maxLength={254} required /></label>
+            </div>
+            <div className="form-row">
+              <label>Me interesa<select name="interes" value={interest} onChange={event => setInterest(event.target.value)} required><option value="">Selecciona una opción</option>{services.map(({name}) => <option key={name}>{name}</option>)}<option>Ambos servicios</option></select></label>
+              <label>Mi experiencia<select name="experiencia" defaultValue="" required><option value="">Selecciona tu nivel</option><option>Estoy comenzando</option><option>Tengo algo de experiencia</option><option>Opero o invierto habitualmente</option></select></label>
+            </div>
+            <label>Disponibilidad y zona horaria<input name="disponibilidad" placeholder="Ej. martes por la tarde, Ciudad de México" maxLength={250} required /></label>
+            <label>¿Qué te gustaría lograr?<textarea name="objetivos" rows={3} placeholder="Cuéntame sobre tus objetivos…" minLength={10} maxLength={2000} required /></label>
+            <div className="consent"><label><input type="checkbox" name="consentimiento" value="Acepto el uso de mis datos para gestionar esta solicitud" required /> Acepto el uso de mis datos para gestionar mi cita.</label><button type="button" className="text-button" onClick={() => privacy.current?.showModal()}>Ver privacidad</button></div>
+            <button className="button submit" type="submit">Enviar solicitud <span aria-hidden="true">↗</span></button>
+          </form>
+        </section>
+
+        <section className="section faq">
+          <div><p className="eyebrow">ANTES DE AGENDAR</p><h2>Preguntas frecuentes</h2></div>
+          <div>{questions.map(([question, answer]) => <details key={question}><summary>{question}<span aria-hidden="true">+</span></summary><p>{answer}</p></details>)}</div>
+        </section>
+      </main>
+
+      <footer className="footer"><div className="shell"><a href="#inicio" className="wordmark"><span className="logomark" aria-hidden="true">↗</span><span>ROTE<span className="wordmark-light">CAPITAL</span></span></a><div><button className="text-button" type="button" onClick={() => privacy.current?.showModal()}>Privacidad</button><a href={instagram} target="_blank" rel="noreferrer">Instagram ↗</a></div></div></footer>
+      <dialog ref={privacy} aria-labelledby="privacy-title"><form method="dialog"><button className="close" aria-label="Cerrar aviso de privacidad">×</button></form><h2 id="privacy-title">Tu privacidad</h2><p>Edgar Rosales, de ROTE Capital, usará tus datos para responder y coordinar tu cita. FormSubmit procesa el formulario y lo envía a {email}.</p><p>Evita incluir credenciales o datos financieros sensibles. Puedes solicitar acceso, corrección o eliminación de tus datos escribiendo a ese correo.</p></dialog>
+    </>
   );
 }

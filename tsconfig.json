@@ -6,14 +6,12 @@
       "dom.iterable",
       "esnext"
     ],
-    "allowJs": true,
-    "skipLibCheck": true,
     "strict": true,
+    "skipLibCheck": true,
     "noEmit": true,
-    "esModuleInterop": true,
     "module": "esnext",
     "moduleResolution": "bundler",
-    "resolveJsonModule": true,
+    "esModuleInterop": true,
     "isolatedModules": true,
     "jsx": "react-jsx",
     "incremental": true,
@@ -22,32 +20,17 @@
         "name": "next"
       }
     ],
-    "paths": {
-      "@/*": [
-        "./*"
-      ]
-    },
-    "types": [
-      "node",
-      "@cloudflare/workers-types"
-    ]
+    "allowJs": true,
+    "resolveJsonModule": true
   },
   "include": [
     "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
+    "app/**/*.ts",
+    "app/**/*.tsx",
     ".next/types/**/*.ts",
-    ".next/dev/types/**/*.ts",
-    "**/*.mts"
+    ".next/dev/types/**/*.ts"
   ],
   "exclude": [
-    "node_modules",
-    "examples",
-    "dist",
-    ".vinext",
-    ".wrangler",
-    ".sites-runtime",
-    "outputs",
-    "work"
+    "node_modules"
   ]
 }
