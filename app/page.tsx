@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const services = [
   {
@@ -35,9 +35,32 @@ const questions = [
 const email = "edgar.pro91@icloud.com";
 const instagram = "https://www.instagram.com/edroscapital/";
 
+// Decorative candle coordinates, independent of market data.
+const candles = [
+  [112, 99], [103, 87], [89, 97], [95, 77], [79, 63], [65, 72],
+  [70, 51], [53, 41], [40, 49], [47, 29], [31, 18], [20, 24], [22, 10],
+];
+
 export default function Home() {
   const [interest, setInterest] = useState("");
+  const [chartPaused, setChartPaused] = useState(false);
   const privacy = useRef<HTMLDialogElement>(null);
+  const confirmationUrl = useRef<HTMLInputElement>(null);
+  const stats = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const row = stats.current;
+    if (!row || !("IntersectionObserver" in window)) return;
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        row.classList.add("stats-visible");
+        observer.disconnect();
+      }
+    }, { threshold: 0.3 });
+    observer.observe(row);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <>
@@ -66,18 +89,33 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="hero-visual">
+          <div className="hero-visual" data-chart-paused={chartPaused}>
             <div className="hero-grid" aria-hidden="true" />
             <Image src="/assets/edgar.png" alt="Edgar Rosales, mentor de trading y analista de inversiones" fill preload sizes="(max-width: 800px) 100vw, 45vw" />
-            <svg className="trace" viewBox="0 0 440 170" preserveAspectRatio="none" aria-hidden="true">
-              <path d="M0 149 L35 137 L63 148 L96 111 L130 121 L168 88 L202 99 L244 62 L278 74 L312 45 L343 57 L390 19 L440 0" />
+            <svg className="candle-chart" viewBox="0 0 330 140" preserveAspectRatio="none" aria-hidden="true">
+              {candles.map(([open, close], index) => {
+                const x = 15 + index * 25;
+                const top = Math.min(open, close);
+                const bottom = Math.max(open, close);
+                return (
+                  <g key={x} className={close > open ? "candle candle-down" : "candle"}
+                    style={{ animationDelay: `${index * 310 - 3800}ms` }}>
+                    <line x1={x} x2={x} y1={top - 6} y2={bottom + 7} />
+                    <rect x={x - 5} y={top} width={10} height={bottom - top} rx={1} />
+                  </g>
+                );
+              })}
             </svg>
+            <button className="chart-toggle" type="button" aria-pressed={chartPaused}
+              aria-label="Pausar la animación del gráfico" onClick={() => setChartPaused(!chartPaused)}>
+              <span aria-hidden="true">{chartPaused ? "▶" : "Ⅱ"}</span>
+            </button>
             <span className="visual-index">ROTE CAPITAL / 01</span>
             <div className="profile-label"><span className="profile-symbol" aria-hidden="true">↗</span><div><strong>Edgar Rosales</strong><small>Inversor · Mentor de trading</small></div></div>
           </div>
         </section>
 
-        <section className="stats" aria-label="Trayectoria">
+        <section className="stats" ref={stats} aria-label="Trayectoria">
           <div><strong>10+</strong><span>Años en mercados<br />financieros</span></div>
           <div><strong>MBA</strong><span>Administración y Finanzas<br />Tecmilenio · 2018</span></div>
           <div><strong>1:1</strong><span>Mentoría según<br />tus objetivos</span></div>
@@ -125,12 +163,21 @@ export default function Home() {
             <div className="contact"><a href={`mailto:${email}`}>{email} <span aria-hidden="true">↗</span></a><a href={instagram} target="_blank" rel="noreferrer">Instagram · @edroscapital <span aria-hidden="true">↗</span></a></div>
           </div>
 
-          <form className="booking-form" action={`https://formsubmit.co/${email}`} method="post">
+          <form
+            className="booking-form"
+            action={`https://formsubmit.co/${email}`}
+            method="post"
+            onSubmit={() => {
+              if (confirmationUrl.current) {
+                confirmationUrl.current.value = new URL("/gracias.html", window.location.origin).href;
+              }
+            }}
+          >
             <h3>Solicita tu cita</h3>
             <p>Completa tus datos para coordinar la conversación.</p>
             <input type="hidden" name="_subject" value="ROTE Capital — Nueva solicitud de cita" />
             <input type="hidden" name="_template" value="table" />
-            <input type="hidden" name="_next" value="https://rote-capital-mentoria.edgar-pro91.chatgpt.site/gracias.html" />
+            <input ref={confirmationUrl} type="hidden" name="_next" defaultValue="https://rote-capital-mentoria.edgar-pro91.chatgpt.site/gracias.html" />
             <input hidden type="text" name="_honey" tabIndex={-1} autoComplete="off" />
             <div className="form-row">
               <label>Nombre completo<input name="nombre" autoComplete="name" placeholder="Tu nombre" maxLength={120} required /></label>
