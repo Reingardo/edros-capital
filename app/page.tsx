@@ -28,12 +28,13 @@ const process = [
 
 const questions = [
   ["¿Necesito experiencia previa?", "Puedes solicitar una conversación tanto si estás empezando como si ya operas o inviertes. En el primer contacto revisaremos tus objetivos."],
-  ["¿Cómo se agenda una cita?", "Envía tu disponibilidad y zona horaria. Te contactaré por correo para acordar la fecha y los detalles."],
+  ["¿Cómo se agenda una cita?", "Envía tu solicitud y te contactaré por correo para acordar la fecha y los detalles. Si ya conoces tu disponibilidad, puedes incluirla en los datos opcionales."],
   ["¿Qué incluye y cuánto cuesta?", "El alcance, la frecuencia y los honorarios se acuerdan según tus objetivos y el tipo de acompañamiento que buscas."],
 ];
 
 const email = "edgar.pro91@icloud.com";
 const instagram = "https://www.instagram.com/edroscapital/";
+const tiktok = "https://www.tiktok.com/@edroscapital";
 
 // Decorative candle coordinates, independent of market data.
 const candles = [
@@ -47,16 +48,14 @@ export default function Home() {
   const privacy = useRef<HTMLDialogElement>(null);
   const confirmationUrl = useRef<HTMLInputElement>(null);
   const stats = useRef<HTMLElement>(null);
+  const mobileMenu = useRef<HTMLDetailsElement>(null);
 
   useEffect(() => {
     const row = stats.current;
     if (!row || !("IntersectionObserver" in window)) return;
 
     const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        row.classList.add("stats-visible");
-        observer.disconnect();
-      }
+      row.classList.toggle("stats-visible", entry.isIntersecting);
     }, { threshold: 0.3 });
     observer.observe(row);
     return () => observer.disconnect();
@@ -70,15 +69,33 @@ export default function Home() {
             <span className="logomark" aria-hidden="true">↗</span>
             <span>EdRos<span className="wordmark-light"> Capital</span></span>
           </a>
-          <nav aria-label="Navegación principal">
+          <nav className="desktop-nav" aria-label="Navegación principal">
             <a href="#servicios">Servicios</a><a href="#enfoque">Enfoque</a><a href="#sobre-mi">Sobre mí</a>
           </nav>
           <a className="button button-small" href="#agenda">Solicitar cita <span aria-hidden="true">↗</span></a>
+          <details className="mobile-menu" ref={mobileMenu} onKeyDown={event => {
+            if (event.key === "Escape" && mobileMenu.current?.open) {
+              mobileMenu.current.open = false;
+              mobileMenu.current.querySelector("summary")?.focus();
+            }
+          }}>
+            <summary><span>Menú</span><span className="menu-icon" aria-hidden="true" /></summary>
+            <nav aria-label="Navegación móvil" onClick={event => {
+              if ((event.target as HTMLElement).closest("a") && mobileMenu.current) {
+                mobileMenu.current.open = false;
+              }
+            }}>
+              <a href="#servicios">Servicios <span aria-hidden="true">↗</span></a>
+              <a href="#enfoque">Enfoque <span aria-hidden="true">↗</span></a>
+              <a href="#sobre-mi">Sobre mí <span aria-hidden="true">↗</span></a>
+              <a href="#agenda">Solicitar una cita <span aria-hidden="true">↗</span></a>
+            </nav>
+          </details>
         </div>
       </header>
 
       <main id="inicio" className="shell">
-        <section className="hero">
+        <section className="hero" data-motion-paused={chartPaused}>
           <div className="hero-copy">
             <p className="eyebrow"><span className="status-dot" /> MENTORÍA INDIVIDUAL</p>
             <h1>Lee el mercado.<br /><em>Decide con criterio.</em></h1>
@@ -107,7 +124,7 @@ export default function Home() {
               })}
             </svg>
             <button className="chart-toggle" type="button" aria-pressed={chartPaused}
-              aria-label="Pausar la animación del gráfico" onClick={() => setChartPaused(!chartPaused)}>
+              aria-label="Pausar las animaciones" onClick={() => setChartPaused(!chartPaused)}>
               <span aria-hidden="true">{chartPaused ? "▶" : "Ⅱ"}</span>
             </button>
             <span className="visual-index">EdRos Capital / 01</span>
@@ -115,7 +132,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="stats" ref={stats} aria-label="Trayectoria">
+        <section className="stats" ref={stats} aria-label="Trayectoria" data-motion-paused={chartPaused}>
           <div><strong>10+</strong><span>Años en mercados<br />financieros</span></div>
           <div><strong>MBA</strong><span>Administración y Finanzas<br />Tecmilenio · 2018</span></div>
           <div><strong>1:1</strong><span>Mentoría según<br />tus objetivos</span></div>
@@ -144,7 +161,7 @@ export default function Home() {
         </section>
 
         <section className="section about" id="sobre-mi">
-          <div className="about-photo"><Image src="/assets/biografia.jpeg" alt="Retrato de Edgar Rosales" fill sizes="(max-width: 800px) 100vw, 36vw" /></div>
+          <div className="about-photo" data-motion-paused={chartPaused}><Image src="/assets/biografia.jpeg" alt="Retrato de Edgar Rosales" fill sizes="(max-width: 800px) 100vw, 36vw" /></div>
           <div className="about-copy">
             <p className="eyebrow">03 / TU MENTOR</p>
             <h2>Soy Edgar Rosales.</h2>
@@ -159,8 +176,12 @@ export default function Home() {
           <div className="booking-copy">
             <p className="eyebrow">04 / PRIMER CONTACTO</p>
             <h2>Hablemos de<br />tus objetivos.</h2>
-            <p>Cuéntame qué te gustaría trabajar y cuándo tienes disponibilidad. Te contactaré por correo para acordar una fecha.</p>
-            <div className="contact"><a href={`mailto:${email}`}>{email} <span aria-hidden="true">↗</span></a><a href={instagram} target="_blank" rel="noreferrer">Instagram · @edroscapital <span aria-hidden="true">↗</span></a></div>
+            <p>Cuéntame qué te gustaría trabajar. Te contactaré por correo para acordar una fecha y los detalles de la conversación.</p>
+            <div className="contact">
+              <a href={`mailto:${email}`}>{email} <span aria-hidden="true">↗</span></a>
+              <a href={instagram} target="_blank" rel="noreferrer">Instagram · @edroscapital <span aria-hidden="true">↗</span></a>
+              <a href={tiktok} target="_blank" rel="noreferrer">TikTok · @edroscapital <span aria-hidden="true">↗</span></a>
+            </div>
           </div>
 
           <form
@@ -174,23 +195,28 @@ export default function Home() {
             }}
           >
             <h3>Solicita tu cita</h3>
-            <p>Completa tus datos para coordinar la conversación.</p>
+            <p>Comparte tus datos y tu objetivo. Los campos marcados con * son obligatorios.</p>
             <input type="hidden" name="_subject" value="EdRos Capital — Nueva solicitud de cita" />
             <input type="hidden" name="_template" value="table" />
             <input ref={confirmationUrl} type="hidden" name="_next" defaultValue="https://edros-capital.vercel.app/gracias.html" />
             <input hidden type="text" name="_honey" tabIndex={-1} autoComplete="off" />
             <div className="form-row">
-              <label>Nombre completo<input name="nombre" autoComplete="name" placeholder="Tu nombre" maxLength={120} required /></label>
-              <label>Correo electrónico<input type="email" name="email" autoComplete="email" placeholder="tu@correo.com" maxLength={254} required /></label>
+              <label>Nombre completo <span aria-hidden="true">*</span><input name="nombre" autoComplete="name" placeholder="Tu nombre" maxLength={120} required /></label>
+              <label>Correo electrónico <span aria-hidden="true">*</span><input type="email" name="email" inputMode="email" autoComplete="email" autoCapitalize="none" spellCheck={false} placeholder="tu@correo.com" maxLength={254} required /></label>
             </div>
-            <div className="form-row">
-              <label>Me interesa<select name="interes" value={interest} onChange={event => setInterest(event.target.value)} required><option value="">Selecciona una opción</option>{services.map(({name}) => <option key={name}>{name}</option>)}<option>Ambos servicios</option></select></label>
-              <label>Mi experiencia<select name="experiencia" defaultValue="" required><option value="">Selecciona tu nivel</option><option>Estoy comenzando</option><option>Tengo algo de experiencia</option><option>Opero o invierto habitualmente</option></select></label>
-            </div>
-            <label>Disponibilidad y zona horaria<input name="disponibilidad" placeholder="Ej. martes por la tarde, Ciudad de México" maxLength={250} required /></label>
-            <label>¿Qué te gustaría lograr?<textarea name="objetivos" rows={3} placeholder="Cuéntame sobre tus objetivos…" minLength={10} maxLength={2000} required /></label>
+            <label>Me interesa <span aria-hidden="true">*</span><select name="interes" value={interest} onChange={event => setInterest(event.target.value)} required><option value="">Selecciona una opción</option>{services.map(({name}) => <option key={name}>{name}</option>)}<option>Ambos servicios</option></select></label>
+            <label>¿Qué te gustaría lograr? <span aria-hidden="true">*</span><textarea name="objetivos" rows={3} placeholder="Ej. Quiero aprender a gestionar el riesgo de mis operaciones." minLength={10} maxLength={2000} aria-describedby="objectives-help" required /></label>
+            <p className="field-help" id="objectives-help">Escribe al menos 10 caracteres para contarme tu objetivo.</p>
+            <details className="optional-fields">
+              <summary>Agregar experiencia y disponibilidad <span>Opcional</span></summary>
+              <div>
+                <label>Mi experiencia<select name="experiencia" defaultValue=""><option value="">Selecciona tu nivel</option><option>Estoy comenzando</option><option>Tengo algo de experiencia</option><option>Opero o invierto habitualmente</option></select></label>
+                <label>Disponibilidad y zona horaria<input name="disponibilidad" placeholder="Ej. martes por la tarde, Ciudad de México" maxLength={250} /></label>
+              </div>
+            </details>
             <div className="consent"><label><input type="checkbox" name="consentimiento" value="Acepto el uso de mis datos para gestionar esta solicitud" required /> Acepto el uso de mis datos para gestionar mi cita.</label><button type="button" className="text-button" onClick={() => privacy.current?.showModal()}>Ver privacidad</button></div>
             <button className="button submit" type="submit">Enviar solicitud <span aria-hidden="true">↗</span></button>
+            <p className="form-note">Recibirás la respuesta en el correo que indiques. Acordaremos la fecha contigo.</p>
           </form>
         </section>
 

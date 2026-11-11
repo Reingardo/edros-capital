@@ -1,9 +1,9 @@
-# EdRos Capital
+# EDROS CAPITAL
 
 ## Contexto del sitio
 
 - Portafolio personal sin fines de lucro de Edgar Rosales, en español. Presenta su trayectoria en los mercados y su enfoque de mentoría individual en trading y análisis de inversiones.
-- La marca vigente es **EdRos Capital**. El usuario de Instagram es **@edroscapital** y el correo de contacto es **edgar.pro91@icloud.com**.
+- La marca vigente es **EDROS CAPITAL**. El usuario de Instagram es **@edroscapital** y el correo de contacto es **edgar.pro91@icloud.com**.
 - La biografía parte de los datos proporcionados por Edgar. Tiene más de 10 años de experiencia en los mercados, un MBA en Administración y Finanzas por Tecmilenio (2018) y experiencia con futuros, opciones y criptomonedas. Su trayectoria incluye inversiones tempranas en NVIDIA, Palantir, AMD, Google y Tesla. La mención de AMD en la biografía es independiente de la ficha «AMD ↗», que Edgar pidió retirar de la antigua fila de empresas.
 - La versión pública vigente está en [Vercel](https://edros-capital.vercel.app/), en el proyecto `edros/edros-capital` del plan Hobby. También existe una versión anterior en ChatGPT Sites.
 
