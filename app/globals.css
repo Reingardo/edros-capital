@@ -147,6 +147,7 @@ h1 em { color: var(--gold); font-style: normal; }
 .about, .booking { border: 1px solid var(--line); border-radius: 22px; background: var(--panel); overflow: hidden; }
 .about-photo { position: relative; min-height: 410px; overflow: hidden; isolation: isolate; }
 .about-photo img { object-fit: cover; object-position: center 30%; }
+.about-photo .about-photo-alternate { opacity: 0; }
 .about-copy { padding: clamp(25px, 5vw, 62px); align-self: center; }
 .about-copy > p.bio-lead { color: var(--text); font-size: 19px; }
 .tags { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; margin: 24px 0 0; }
@@ -297,10 +298,12 @@ dialog::backdrop { background: #05070bd1; backdrop-filter: blur(4px); }
     animation: photo-scan 12s ease-in-out infinite, market-color 12s steps(1, end) infinite;
   }
   .candle-chart { animation: market-color 12s steps(1, end) infinite; }
+  .about-photo .about-photo-alternate { animation: portrait-swap 12s steps(1, end) infinite; }
   .hero[data-motion-paused="true"] .status-dot,
   .hero[data-motion-paused="true"] .hero-visual::before,
   .hero[data-motion-paused="true"] .candle-chart,
-  .about-photo[data-motion-paused="true"]::after { animation-play-state: paused; }
+  .about-photo[data-motion-paused="true"]::after,
+  .about-photo[data-motion-paused="true"] .about-photo-alternate { animation-play-state: paused; }
   .navigation .wordmark { transition: color 180ms ease-out; }
   .navigation .logomark { transition: background-color 180ms ease-out; }
   .hero-copy > *, .hero-visual {
@@ -401,6 +404,11 @@ dialog::backdrop { background: #05070bd1; backdrop-filter: blur(4px); }
 @keyframes market-color {
   0%, 100% { color: var(--gold); }
   50% { color: #6ee7a5; }
+}
+
+@keyframes portrait-swap {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
 }
 
 @keyframes enter-view {

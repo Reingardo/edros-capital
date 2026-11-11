@@ -161,7 +161,10 @@ export default function Home() {
         </section>
 
         <section className="section about" id="sobre-mi">
-          <div className="about-photo" data-motion-paused={chartPaused}><Image src="/assets/biografia.jpeg" alt="Retrato de Edgar Rosales" fill sizes="(max-width: 800px) 100vw, 36vw" /></div>
+          <div className="about-photo" data-motion-paused={chartPaused}>
+            <Image src="/assets/biografia.jpeg" alt="Retrato de Edgar Rosales" fill sizes="(max-width: 800px) 100vw, 36vw" />
+            <Image className="about-photo-alternate" src="/assets/biografia-alternativa.jpg" alt="" aria-hidden="true" fill sizes="(max-width: 800px) 100vw, 36vw" />
+          </div>
           <div className="about-copy">
             <p className="eyebrow">03 / TU MENTOR</p>
             <h2>Soy Edgar Rosales.</h2>
