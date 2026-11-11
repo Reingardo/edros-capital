@@ -168,9 +168,9 @@ export default function Home() {
           <div className="about-copy">
             <p className="eyebrow">03 / TU MENTOR</p>
             <h2>Soy Edgar Rosales.</h2>
-            <p className="bio-lead">Invierto en tecnología e innovación y llevo más de una década en los mercados financieros.</p>
-            <p>Mi trayectoria incluye inversiones tempranas en NVIDIA, Palantir, AMD, Google y Tesla. Cuento con un MBA en Administración y Finanzas por Tecmilenio, obtenido en 2018, y experiencia operando futuros, opciones y criptomonedas.</p>
-            <p>Fundé EdRos Capital para compartir cómo evalúo negocios, leo el mercado y gestiono el riesgo. En la mentoría trabajamos estas habilidades a partir de tus objetivos.</p>
+            <p className="bio-lead">Fundé EdRos Capital para ayudarte a invertir con criterio, buscar rentabilidad y desarrollar autonomía, compartiendo más de diez años de experiencia.</p>
+            <p>Mi enfoque combina visión de largo plazo y análisis de empresas que transforman industrias. Busco oportunidades donde la innovación y el potencial de crecimiento justifican invertir, con disciplina y una gestión consciente del riesgo.</p>
+            <p>Combino inversión con venta de opciones mediante la estrategia Wheel: cash-secured puts y covered calls. También trabajo spreads e iron condors para buscar primas y aprovechar el paso del tiempo. Te enseño a entender cada estrategia y gestionar sus riesgos para operar por ti mismo.</p>
             <ul className="tags" aria-label="Áreas de experiencia"><li>Tecnología</li><li>Futuros</li><li>Opciones</li><li>Criptomonedas</li></ul>
           </div>
         </section>
