@@ -20,7 +20,7 @@ const services = [
   },
 ];
 
-const process = [
+const mentoringSteps = [
   ["Define una hipótesis", "Identifica qué está pasando, qué esperas que cambie y qué evidencia respaldaría tu lectura."],
   ["Delimita el riesgo", "Antes de tomar una decisión, considera los escenarios posibles y qué invalidaría tu hipótesis."],
   ["Revisa tus decisiones", "Documenta lo que observaste y lo que hiciste para identificar qué puedes ajustar en tu proceso."],
@@ -158,7 +158,7 @@ export default function Home() {
         <section className="section" id="enfoque">
           <div className="section-head"><div><p className="eyebrow">02 / ENFOQUE</p><h2>Cómo trabajaremos</h2></div><p>Un proceso para evaluar una idea, dimensionar el riesgo y aprender de cada decisión.</p></div>
           <ol className="steps">
-            {process.map(([title, description], index) => <li key={title}><span className="eyebrow">PASO 0{index + 1}</span><h3>{title}</h3><p>{description}</p></li>)}
+            {mentoringSteps.map(([title, description], index) => <li key={title}><span className="eyebrow">PASO 0{index + 1}</span><h3>{title}</h3><p>{description}</p></li>)}
           </ol>
         </section>
 
