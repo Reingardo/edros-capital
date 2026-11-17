@@ -8,7 +8,7 @@ export default function Thanks() {
       <span className="eyebrow">EdRos Capital</span>
       <h1>Gracias por <em>escribirme.</em></h1>
       <p>Tu solicitud se ha enviado. Te contactaré por correo para acordar una fecha.</p>
-      <a className="button" href="/">Volver al inicio <span aria-hidden="true">↗</span></a>
+      <a className="button" href={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/`}>Volver al inicio <span aria-hidden="true">↗</span></a>
     </main>
   );
 }

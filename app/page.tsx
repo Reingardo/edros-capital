@@ -32,6 +32,8 @@ const questions = [
   ["¿Qué incluye y cuánto cuesta?", "El alcance, la frecuencia y los honorarios se acuerdan según tus objetivos y el tipo de acompañamiento que buscas."],
 ];
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
 const email = "edgar.pro91@icloud.com";
 const instagram = "https://www.instagram.com/edroscapital/";
 const tiktok = "https://www.tiktok.com/@edroscapital";
@@ -108,7 +110,7 @@ export default function Home() {
 
           <div className="hero-visual" data-chart-paused={chartPaused}>
             <div className="hero-grid" aria-hidden="true" />
-            <Image src="/assets/edgar.png" alt="Edgar Rosales, mentor de trading y analista de inversiones" fill preload sizes="(max-width: 800px) 100vw, 45vw" />
+            <Image src={`${basePath}/assets/edgar.png`} alt="Edgar Rosales, mentor de trading y analista de inversiones" fill preload sizes="(max-width: 800px) 100vw, 45vw" />
             <svg className="candle-chart" viewBox="0 0 330 140" preserveAspectRatio="none" aria-hidden="true">
               {candles.map(([open, close], index) => {
                 const x = 15 + index * 25;
@@ -162,8 +164,8 @@ export default function Home() {
 
         <section className="section about" id="sobre-mi">
           <div className="about-photo" data-motion-paused={chartPaused}>
-            <Image src="/assets/biografia.jpeg" alt="Retrato de Edgar Rosales" fill sizes="(max-width: 800px) 100vw, 36vw" />
-            <Image className="about-photo-alternate" src="/assets/biografia-alternativa.jpg" alt="" aria-hidden="true" fill sizes="(max-width: 800px) 100vw, 36vw" />
+            <Image src={`${basePath}/assets/biografia.jpeg`} alt="Retrato de Edgar Rosales" fill sizes="(max-width: 800px) 100vw, 36vw" />
+            <Image className="about-photo-alternate" src={`${basePath}/assets/biografia-alternativa.jpg`} alt="" aria-hidden="true" fill sizes="(max-width: 800px) 100vw, 36vw" />
           </div>
           <div className="about-copy">
             <p className="eyebrow">03 / TU MENTOR</p>
@@ -193,7 +195,7 @@ export default function Home() {
             method="post"
             onSubmit={() => {
               if (confirmationUrl.current) {
-                confirmationUrl.current.value = new URL("/gracias.html", window.location.origin).href;
+                confirmationUrl.current.value = new URL(`${basePath}/gracias.html`, window.location.origin).href;
               }
             }}
           >
